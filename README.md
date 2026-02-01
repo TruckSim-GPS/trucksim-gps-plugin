@@ -8,7 +8,7 @@ Fork of [RenCloud/scs-sdk-plugin](https://github.com/RenCloud/scs-sdk-plugin), o
 
 The plugin registers with the SCS Telemetry SDK and writes game data into a Memory Mapped File (MMF) at `Local\TSGPSTelemetry` (32 KB). The PC Telemetry Server reads this shared memory region to serve telemetry over HTTP.
 
-The data structure is defined in `scs-telemetry/inc/scs-telemetry-common.hpp` (`scsTelemetryMap_t`). The C# reader that parses this struct lives in `scs-client/C#/SCSSdkClient/` and is linked directly by the server project.
+The data structure is defined in `scs-telemetry/inc/scs-telemetry-common.hpp` (`scsTelemetryMap_t`). The C# reader that parses this struct has been moved to the [PC Telemetry Server](https://github.com/TruckSim-GPS/trucksim-gps-server) repository under `source/Funbit.Ets.Telemetry.Server/SCSSdkClient/`.
 
 ## Building
 
