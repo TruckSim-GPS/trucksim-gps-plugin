@@ -659,30 +659,24 @@ SCSAPI_VOID telemetry_store_float(const scs_string_t name,
                                   const scs_u32_t index,
                                   const scs_value_t* const value,
                                   scs_context_t context) {
-  if (!value) return;
-  assert(value);
+  if (!value || !context) return;
   assert(value->type == SCS_VALUE_TYPE_float);
-  assert(context);
   *static_cast<float*>(context) = value->value_float.value;
 }
 
 SCSAPI_VOID telemetry_store_s32(const scs_string_t name, const scs_u32_t index,
                                 const scs_value_t* const value,
                                 scs_context_t context) {
-  if (!value) return;
-  assert(value);
+  if (!value || !context) return;
   assert(value->type == SCS_VALUE_TYPE_s32);
-  assert(context);
   *static_cast<int*>(context) = value->value_s32.value;
 }
 
 SCSAPI_VOID telemetry_store_u32(const scs_string_t name, const scs_u32_t index,
                                 const scs_value_t* const value,
                                 scs_context_t context) {
-  if (!value) return;
-  assert(value);
+  if (!value || !context) return;
   assert(value->type == SCS_VALUE_TYPE_u32);
-  assert(context);
   *static_cast<unsigned int*>(context) = value->value_u32.value;
 }
 
@@ -705,10 +699,8 @@ SCSAPI_VOID telemetry_store_fvector(const scs_string_t name,
                                     const scs_u32_t index,
                                     const scs_value_t* const value,
                                     scs_context_t context) {
-  if (!value) return;
-  assert(value);
+  if (!value || !context) return;
   assert(value->type == SCS_VALUE_TYPE_fvector);
-  assert(context);
   *(static_cast<float*>(context) + 0) = value->value_fvector.x;
   *(static_cast<float*>(context) + 1) = value->value_fvector.y;
   *(static_cast<float*>(context) + 2) = value->value_fvector.z;
@@ -718,10 +710,8 @@ SCSAPI_VOID telemetry_store_dplacement(const scs_string_t name,
                                        const scs_u32_t index,
                                        const scs_value_t* const value,
                                        scs_context_t context) {
-  if (!value) return;
-  assert(value);
+  if (!value || !context) return;
   assert(value->type == SCS_VALUE_TYPE_dplacement);
-  assert(context);
 
   // Messy hack to store the acceleration and orientation values into our
   // telemetry struct It is neccesary that these are put together, otherwise it
@@ -742,10 +732,8 @@ SCSAPI_VOID telemetry_store_fplacement(const scs_string_t name,
                                        const scs_u32_t index,
                                        const scs_value_t* const value,
                                        scs_context_t context) {
-  if (!value) return;
-  assert(value);
+  if (!value || !context) return;
   assert(value->type == SCS_VALUE_TYPE_fplacement);
-  assert(context);
 
   // Messy hack to store the acceleration and orientation values into our
   // telemetry struct It is neccesary that these are put together, otherwise it
@@ -1148,10 +1136,10 @@ SCSAPI_RESULT scs_telemetry_init(
             telem_ptr->trailer.trailer[i].com_f.wheelRotation[j], j);
         REGISTER_CHANNEL_TRAILER_INDEX(
             i, wheel.lift, float,
-            telem_ptr->trailer.trailer[0].com_f.wheelLift[j], j);
+            telem_ptr->trailer.trailer[i].com_f.wheelLift[j], j);
         REGISTER_CHANNEL_TRAILER_INDEX(
             i, wheel.lift.offset, float,
-            telem_ptr->trailer.trailer[0].com_f.wheelLiftOffset[j], j);
+            telem_ptr->trailer.trailer[i].com_f.wheelLiftOffset[j], j);
       }
     }
   }
