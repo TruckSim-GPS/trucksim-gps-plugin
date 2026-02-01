@@ -1187,6 +1187,8 @@ SCSAPI_VOID scs_telemetry_shutdown() {
 #if LOGGING
   logger::flush();
 #endif
+  if (telem_ptr == nullptr) return;
+
   // Close MemoryMap
   telem_ptr->sdkActive = false;
   telem_ptr->scs_values.game = 0;
@@ -1201,9 +1203,11 @@ SCSAPI_VOID scs_telemetry_shutdown() {
   telem_ptr->renderTime = 0;
   telem_ptr->common_ui.time_abs = 0;
   telem_ptr->common_f.scale = 0;
+  telem_ptr = nullptr;
 
   if (telem_mem != nullptr) {
     telem_mem->Close();
+    telem_mem = nullptr;
   }
 }
 
