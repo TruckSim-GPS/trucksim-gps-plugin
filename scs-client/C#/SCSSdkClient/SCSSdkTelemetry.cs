@@ -21,7 +21,7 @@ namespace SCSSdkClient {
     ///     Currently IDisposable. Was implemented because of an error
     /// </summary>
     public class SCSSdkTelemetry: IDisposable {
-        private const string DefaultSharedMemoryMap = "Local\\SCSTelemetry";
+        private const string DefaultSharedMemoryMap = "Local\\TSGPSTelemetry";
         private const int DefaultUpdateInterval = 100;
         private const int DefaultPausedUpdateInterval = 1000;
 
